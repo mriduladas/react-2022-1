@@ -4,6 +4,11 @@ import NewExpense from "./components/NewExpense/NewExpense";
 
 function App() {
 
+  const onAddExpenseHandler= (data)=>{
+    console.log(data);
+    console.log("hiii");
+  }
+
   //Enpenses parameters
   const expenses = [
     {
@@ -29,7 +34,7 @@ function App() {
 
   return (
     <div>
-      <NewExpense />
+      <NewExpense onAddExpense= {onAddExpenseHandler}/>
         <Expenses items={expenses } />
     </div>
   );
