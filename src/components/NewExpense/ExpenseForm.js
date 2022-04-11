@@ -53,7 +53,7 @@ const submitHandler = (event) =>{
     const data= {
         title:enteredTitle,
         amount: enteredAmount,
-        date: enteredDate
+        date: new Date(enteredDate)
     };
     //console.log(data)
     props.onSaveExpenseData(data);

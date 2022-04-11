@@ -1,16 +1,10 @@
 //import ExpenseItem from "./components/ExpenseItem";
+import {useState} from 'react';
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 
-function App() {
-
-  const onAddExpenseHandler= (data)=>{
-    console.log(data);
-    console.log("hiii");
-  }
-
   //Enpenses parameters
-  const expenses = [
+  const DUMMY_EXPENSES = [
     {
       id: 'e1',
       title: 'Toilet Paper1',
@@ -31,6 +25,21 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ]; 
+
+function App() {
+
+  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+
+  const onAddExpenseHandler= (data)=>{
+    // console.log(data);
+    // console.log("hiii");
+    setExpenses(
+      (prevExpenses)=> { 
+        console.log([data, ...prevExpenses]);
+        return [data, ...prevExpenses]});
+  }
+
+
 
   return (
     <div>
