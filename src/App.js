@@ -1,6 +1,7 @@
 //import ExpenseItem from "./components/ExpenseItem";
 import {useState} from 'react';
 import Expenses from "./components/Expenses/Expenses";
+import NewExpenseMinimized from './components/Expenses/NewExpenseMinimized';
 import NewExpense from "./components/NewExpense/NewExpense";
 
   //Enpenses parameters
@@ -29,6 +30,8 @@ import NewExpense from "./components/NewExpense/NewExpense";
 function App() {
 
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+  const [showNewExpense, setShowNewExpense] = useState(false);
+  //let newExpenseView = <NewExpenseMinimized onShowNewExpense = {onShowNewExpenseHandler}/>
 
   const onAddExpenseHandler= (data)=>{
     // console.log(data);
@@ -36,14 +39,30 @@ function App() {
     setExpenses(
       (prevExpenses)=> { 
         console.log([data, ...prevExpenses]);
-        return [data, ...prevExpenses]});
+        setShowNewExpense(false);
+        return [data, ...prevExpenses]}
+        );
   }
+
+  const onShowNewExpenseHandler= (showNewExpenseFlag) => {
+    setShowNewExpense(showNewExpenseFlag);
+  }
+
+ let newExpenseView;
+  if(showNewExpense){
+    newExpenseView = <NewExpense onAddExpense= {onAddExpenseHandler}/>
+  }else{
+    newExpenseView = <NewExpenseMinimized onShowNewExpense = {onShowNewExpenseHandler}/>
+  }
+
 
 
 
   return (
     <div>
-      <NewExpense onAddExpense= {onAddExpenseHandler}/>
+        {newExpenseView}
+      {/* <NewExpense onAddExpense= {onAddExpenseHandler}/>
+      <NewExpenseMinimized onShowNewExpense = {onShowNewExpenseHandler}/> */}
         <Expenses items={expenses } />
     </div>
   );
